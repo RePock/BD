@@ -5,87 +5,142 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibrarySystem"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="510">
-    <StackPanel>
-        <Label Height="27" Content="1)Вывести всех школьников из определённого класса" RenderTransformOrigin="1,0" Width="300" />
-        <TextBlock TextWrapping="Wrap">
-            <TextBox x:Name="NumberOfClass" Width="400" RenderTransformOrigin="0,0" Height="22" />
-            <Button Name="FirstRequest" Click="DoFirstRequest" Visibility="Visible" IsEnabled="True" Content="Найти"
+        Title="MainWindow" Height="800" Width="610">
+    <ScrollViewer>
+        <StackPanel>
+            
+            <Button Name="Tickets" Click="ShowTickets" Visibility="Visible" IsEnabled="True"
+                    Content="Читатели"
                     Width="80" Height="30" HorizontalAlignment="Left" />
-        </TextBlock>
-        
-        <Label Height="27" Content="2)Вывести работников с опрделённой работы" RenderTransformOrigin="1,0" Width="300" />
-        <TextBlock TextWrapping="Wrap">
-            <TextBox x:Name="WorkPlace" Width="400" RenderTransformOrigin="0,0" Height="22" />
-            <Button Name="SecondRequest" Click="DoSecondRequest" Visibility="Visible" IsEnabled="True" Content="Найти"
-                    Width="80" Height="30" HorizontalAlignment="Left" />
-        </TextBlock>
-        
-        <Label Height="27" Content="3)Вывести учителей с опрделённой университета" RenderTransformOrigin="1,0" Width="300" />
-        <TextBlock TextWrapping="Wrap">
-            <TextBox x:Name="NameOfUniversity" Width="400" RenderTransformOrigin="0,0" Height="22" />
-            <Button Name="ThirdRequest" Click="DoThirdRequest" Visibility="Visible" IsEnabled="True" Content="Найти"
-                    Width="80" Height="30" HorizontalAlignment="Left" />
-        </TextBlock>
-        
-        
-        <Label Height="27" Content="4)Вывести пенсионера с определённым номером пенсионного" RenderTransformOrigin="1,0" Width="350" />
-        <TextBlock TextWrapping="Wrap">
-            <TextBox x:Name="NumberOfPensionDocument" Width="400" RenderTransformOrigin="0,0" Height="22" />
-            <Button Name="FourRequest" Click="DoFourRequest" Visibility="Visible" IsEnabled="True" Content="Найти"
-                    Width="80" Height="30" HorizontalAlignment="Left" />
-        </TextBlock>
-        
-        
-        <Label Height="27" Content="5)Вывести студентов из определённого университета" RenderTransformOrigin="1,0" Width="350" />
-        <TextBlock TextWrapping="Wrap">
-            <TextBox x:Name="NameOfUniversityByStudent" Width="400" RenderTransformOrigin="0,0" Height="22" />
-            <Button Name="FiveRequest" Click="DoFiveRequest" Visibility="Visible" IsEnabled="True" Content="Найти"
-                    Width="80" Height="30" HorizontalAlignment="Left" />
-        </TextBlock>
-        
-        
-        <Label Height="27" Content="6)Вывести читателей данной книги" RenderTransformOrigin="1,0" Width="350" />
-        <TextBlock TextWrapping="Wrap">
-            <TextBox x:Name="NameOfBook" Width="400" RenderTransformOrigin="0,0" Height="22" />
-            <Button Name="SixRequest" Click="DoSixRequest" Visibility="Visible" IsEnabled="True" Content="Найти"
-                    Width="80" Height="30" HorizontalAlignment="Left" />
-        </TextBlock>
-        
-        
-        <Label Height="27" Content="7)Вывести читателей в промежуток времени" RenderTransformOrigin="1,0" Width="350" />
-        <TextBlock TextWrapping="Wrap">
-            <TextBox x:Name="DateStart" Width="200" RenderTransformOrigin="0,0" Height="22" />
-            <TextBox x:Name="DateFinish" Width="200" RenderTransformOrigin="0,0" Height="22" />
-            <Button Name="SevenRequest" Click="DoSevenRequest" Visibility="Visible" IsEnabled="True" Content="Найти"
-                    Width="80" Height="30" HorizontalAlignment="Left" />
-        </TextBlock>
-        
-        
-        <Label Height="27" Content="8)Вывести Самую популярные книги" RenderTransformOrigin="1,0" Width="350" />
-        <TextBlock TextWrapping="Wrap">
-            <Button Name="EightRequest" Click="DoEightRequest" Visibility="Visible" IsEnabled="True" Content="Найти"
-                    Width="80" Height="30" HorizontalAlignment="Left" />
-        </TextBlock>
-        
-        
-        <Label Height="27" Content="9)Вывести Работников библиотеки" RenderTransformOrigin="1,0" Width="350" />
-        <TextBlock TextWrapping="Wrap">
-            <TextBox x:Name="IdLibrary" Width="400" RenderTransformOrigin="0,0" Height="22" />
-            <Button Name="NineRequest" Click="DoNineRequest" Visibility="Visible" IsEnabled="True" Content="Найти"
-                    Width="80" Height="30" HorizontalAlignment="Left" />
-        </TextBlock>
-        
-        
-        <Label Height="27" Content="10)Вывести должников" RenderTransformOrigin="1,0" Width="350" />
-        <TextBlock TextWrapping="Wrap">
-            <Button Name="TenRequest" Click="DoTenRequest" Visibility="Visible" IsEnabled="True" Content="Найти"
-                    Width="80" Height="30" HorizontalAlignment="Left" />
-        </TextBlock>
-        
-        
-        <Label Name="Result" Height="27" Content="Результат запроса" RenderTransformOrigin="1,0" Width="350" />
-        <DataGrid x:Name="grid" HorizontalAlignment="Left" Height="251" Margin="23,23,0,0" VerticalAlignment="Bottom"
-                  Width="455" />
-    </StackPanel>
+            
+            
+            <Label Height="27" Content="1)Вывести всех школьников из определённого класса" RenderTransformOrigin="1,0"
+                   Width="320" HorizontalAlignment="Left"/>
+            <TextBlock TextWrapping="Wrap">
+                <TextBox x:Name="NumberOfClass" Width="400" RenderTransformOrigin="0,0" Height="22" />
+                <Button Name="FirstRequest" Click="PrintSchoolchildByClass" Visibility="Visible" IsEnabled="True"
+                        Content="Найти"
+                        Width="80" Height="30" HorizontalAlignment="Left" />
+            </TextBlock>
+
+            <Label Height="27" Content="2)Вывести работников с опрделённой работы" RenderTransformOrigin="1,0"
+                   Width="300" HorizontalAlignment="Left"/>
+            <TextBlock TextWrapping="Wrap">
+                <TextBox x:Name="WorkPlace" Width="400" RenderTransformOrigin="0,0" Height="22" />
+                <Button Name="SecondRequest" Click="PrintWorkerByWorkPlace" Visibility="Visible" IsEnabled="True"
+                        Content="Найти"
+                        Width="80" Height="30" HorizontalAlignment="Left" />
+            </TextBlock>
+
+            <Label Height="27" Content="3)Вывести учителей с опрделённого университета" RenderTransformOrigin="1,0"
+                   Width="300" HorizontalAlignment="Left"/>
+            <TextBlock TextWrapping="Wrap">
+                <TextBox x:Name="NameOfUniversity" Width="400" RenderTransformOrigin="0,0" Height="22" />
+                <Button Name="ThirdRequest" Click="PrintTeacherByUniversity" Visibility="Visible" IsEnabled="True"
+                        Content="Найти"
+                        Width="80" Height="30" HorizontalAlignment="Left" />
+            </TextBlock>
+
+
+            <Label Height="27" Content="4)Вывести пенсионера с определённым номером пенсионного"
+                   RenderTransformOrigin="1,0" Width="370" HorizontalAlignment="Left"/>
+            <TextBlock TextWrapping="Wrap">
+                <TextBox x:Name="NumberOfPensionDocument" Width="400" RenderTransformOrigin="0,0" Height="22" />
+                <Button Name="FourRequest" Click="PrintPensionerByNumberOfPensionDocument" Visibility="Visible" IsEnabled="True" Content="Найти"
+                        Width="80" Height="30" HorizontalAlignment="Left" />
+            </TextBlock>
+
+
+            <Label Height="27" Content="5)Вывести студентов из определённого университета" RenderTransformOrigin="1,0"
+                   Width="350" HorizontalAlignment="Left"/>
+            <TextBlock TextWrapping="Wrap">
+                <TextBox x:Name="NameOfUniversityByStudent" Width="400" RenderTransformOrigin="0,0" Height="22" />
+                <Button Name="FiveRequest" Click="PrintStudentByUniversity" Visibility="Visible" IsEnabled="True" Content="Найти"
+                        Width="80" Height="30" HorizontalAlignment="Left" />
+            </TextBlock>
+
+
+            <Label Height="27" Content="6)Вывести читателей данной книги" RenderTransformOrigin="1,0" Width="350" />
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left">
+                <TextBox x:Name="NameOfBook" Width="400" RenderTransformOrigin="0,0" Height="22" />
+                <Button Name="SixRequest" Click="PrintPeopleByReadingProduct" Visibility="Visible" IsEnabled="True" Content="Найти"
+                        Width="80" Height="30" HorizontalAlignment="Left" />
+            </TextBlock>
+
+
+            <Label Height="27" Content="7)Вывести читателей в промежуток времени" RenderTransformOrigin="1,0"
+                   Width="350" HorizontalAlignment="Left"/>
+            <TextBlock TextWrapping="Wrap">
+                <DatePicker Name="datePicker1" IsDropDownOpen="False" />
+                <DatePicker Name="datePicker2" IsDropDownOpen="False" />
+                <Button Name="SevenRequest" Click="PrintPeopleByReadingProductOnTime" Visibility="Visible" IsEnabled="True"
+                        Content="Найти"
+                        Width="80" Height="30" HorizontalAlignment="Left" />
+            </TextBlock>
+
+
+            <TextBlock TextWrapping="Wrap">
+                <Label Height="27" Content="8)Вывести Самую популярную книгу" RenderTransformOrigin="1,0" Width="250" HorizontalAlignment="Left"/>
+                <Button Name="EightRequest" Click="PrintMostPopularProduct" Visibility="Visible" IsEnabled="True"
+                        Content="Найти"
+                        Width="80" Height="30" HorizontalAlignment="Left" />
+            </TextBlock>
+
+
+            <Label Height="27" Content="9)Вывести Работников библиотеки" RenderTransformOrigin="1,0" Width="350" HorizontalAlignment="Left"/>
+            <TextBlock TextWrapping="Wrap">
+                <TextBox x:Name="IdLibrary" Width="400" RenderTransformOrigin="0,0" Height="22" />
+                <Button Name="NineRequest" Click="PrintWorkerLibraryByLibrary" Visibility="Visible" IsEnabled="True" Content="Найти"
+                        Width="80" Height="30" HorizontalAlignment="Left" />
+            </TextBlock>
+
+
+            <TextBlock TextWrapping="Wrap">
+                <Label Height="27" Content="10)Вывести должников" RenderTransformOrigin="1,0" Width="150" HorizontalAlignment="Left"/>
+                <Button Name="TenRequest" Click="PrintOverdueReader" Visibility="Visible" IsEnabled="True" Content="Найти"
+                        Width="80" Height="30" HorizontalAlignment="Left" />
+            </TextBlock>
+
+
+            <Label Height="27" Content="11)Вывести книги с определённой полки" RenderTransformOrigin="1,0" Width="350" HorizontalAlignment="Left"/>
+            <TextBlock TextWrapping="Wrap">
+                <TextBox x:Name="NumberOfShelving" Width="400" RenderTransformOrigin="0,0" Height="22" />
+                <Button Name="EleventhRequest" Click="PrintProductByLocation" Visibility="Visible" IsEnabled="True" Content="Найти"
+                        Width="80" Height="30" HorizontalAlignment="Left" />
+            </TextBlock>
+            
+            <Label Height="27" Content="12)Вывести читателей обслуженных библиотекарем" RenderTransformOrigin="1,0" Width="350" HorizontalAlignment="Left"/>
+            <TextBlock TextWrapping="Wrap">
+                <TextBox x:Name="LibraryWorkerId" Width="400" RenderTransformOrigin="0,0" Height="22" />
+                <Button Name="TwelvRequest" Click="PrintPeopleServicedByLibraryWorker" Visibility="Visible" IsEnabled="True" Content="Найти"
+                        Width="80" Height="30" HorizontalAlignment="Left" />
+            </TextBlock>
+
+            
+            
+            <Label Height="27" Content="13)Вывести все произведения автора" RenderTransformOrigin="1,0" Width="350" HorizontalAlignment="Left"/>
+            <TextBlock TextWrapping="Wrap">
+                <TextBox x:Name="AuthorId" Width="400" RenderTransformOrigin="0,0" Height="22" />
+                <Button Name="ThreeteenRequest" Click="PrintProductByAuthor" Visibility="Visible" IsEnabled="True" Content="Найти"
+                        Width="80" Height="30" HorizontalAlignment="Left" />
+            </TextBlock>
+            
+            <Label Height="27" Content="14)Количество обслуженных читателей в определённый промежуток времени" RenderTransformOrigin="1,0"
+                   Width="350" HorizontalAlignment="Left"/>
+            <TextBlock TextWrapping="Wrap">
+                <DatePicker Name="datePicker3" IsDropDownOpen="False" />
+                <DatePicker Name="datePicker4" IsDropDownOpen="False" />
+                <Button Name="FourTeenRequest" Click="PrintCountPeopleServicedByLibraryWorker" Visibility="Visible" IsEnabled="True"
+                        Content="Найти"
+                        Width="80" Height="30" HorizontalAlignment="Left" />
+            </TextBlock>
+            
+            
+            <Label Name="Result" Height="27" Content="Результат запроса" RenderTransformOrigin="1,0" Width="350" />
+            <DataGrid x:Name="grid" HorizontalAlignment="Left" Height="251" Margin="23,23,0,0"
+                      VerticalAlignment="Bottom"
+                      Width="455" />
+            
+        </StackPanel>
+    </ScrollViewer>
 </Window>

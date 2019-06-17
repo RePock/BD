@@ -1,34 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Alex\.Rider2019.1\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Alex\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_LibrarySystem.492049791.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Alex\.Rider2018.3\config\extensions" t="IncludeRecursive" />
+    <e p="C:\Users\Alex\.Rider2018.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Alex\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_LibrarySystem.492049791.00" t="ExcludeRecursive" />
     <e p="C:\Users\Alex\RiderProjects\LibrarySystem" t="IncludeFlat">
       <e p="LibrarySystem" t="IncludeRecursive">
-        <e p="App.config" t="Include" />
+        <e p="AddReader.xaml" t="Include" />
+        <e p="AddReader.xaml.cs" t="Include" />
         <e p="App.xaml" t="Include" />
         <e p="App.xaml.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="LibrarySystem.csproj" t="IncludeRecursive" />
         <e p="MainWindow.xaml" t="Include" />
         <e p="MainWindow.xaml.cs" t="Include" />
+        <e p="Migrations" t="Include">
+          <e p="20190616211228_Initial.cs" t="Include" />
+          <e p="20190616211228_Initial.designer.cs" t="Include" />
+          <e p="LibraryContextModelSnapshot.cs" t="Include" />
+        </e>
         <e p="Models" t="Include">
-          <e p="Author.cs" t="Include" />
-          <e p="Edition.cs" t="Include" />
-          <e p="Issue.cs" t="Include" />
-          <e p="Library.cs" t="Include" />
-          <e p="LibraryFund.cs" t="Include" />
-          <e p="LibraryWorker.cs" t="Include" />
-          <e p="Limit.cs" t="Include" />
-          <e p="Location.cs" t="Include" />
-          <e p="Product.cs" t="Include" />
-          <e p="Readers.cs" t="Include" />
+          <e p="Entity" t="Include">
+            <e p="Author.cs" t="Include" />
+            <e p="Edition.cs" t="Include" />
+            <e p="Issue.cs" t="Include" />
+            <e p="Library.cs" t="Include" />
+            <e p="LibraryFund.cs" t="Include" />
+            <e p="LibraryWorker.cs" t="Include" />
+            <e p="Limit.cs" t="Include" />
+            <e p="Location.cs" t="Include" />
+            <e p="Product.cs" t="Include" />
+            <e p="Readers.cs" t="Include" />
+            <e p="TypeOfCategory.cs" t="Include" />
+            <e p="TypeOfEdition.cs" t="Include" />
+          </e>
           <e p="RepositoryAndContext" t="Include">
             <e p="LibraryContext.cs" t="Include" />
             <e p="LibraryContextRepository.cs" t="Include" />
           </e>
-          <e p="TypeOfCategory.cs" t="Include" />
-          <e p="TypeOfEdition.cs" t="Include" />
           <e p="TypeOfReader" t="Include">
             <e p="Pensioner.cs" t="Include" />
             <e p="Schoolchild.cs" t="Include" />

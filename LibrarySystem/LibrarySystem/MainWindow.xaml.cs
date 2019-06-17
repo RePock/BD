@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.IO;
 using System.Windows;
-using System.Windows.Documents;
 using LibrarySystem.Models;
 using LibrarySystem.Models.Repository;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using EntityState = Microsoft.EntityFrameworkCore.EntityState;
 
 namespace LibrarySystem
 {
@@ -128,22 +132,25 @@ namespace LibrarySystem
 
                 var product1 = new Product()
                     {Name = "product1", TypeOfCategory = TypeOfCategory.Story, InStock = true, Library = library1};
-                libraryContex.Products.Add(product1);
+                
                 var product2 = new Product()
                     {Name = "product2", TypeOfCategory = TypeOfCategory.Textbook, InStock = false, Library = library1};
-                libraryContex.Products.Add(product2);
+                
                 var product3 = new Product()
                     {Name = "product3", TypeOfCategory = TypeOfCategory.Story, InStock = true, Library = library1};
-                libraryContex.Products.Add(product3);
+                
 
                 var author1 = new Author()
                     {Id = product1.Id, FirstName = "Max", LastName = "Max"};
+                product1.Author = author1;
                 libraryContex.Authors.Add(author1);
                 var author2 = new Author()
                     {Id = product2.Id, FirstName = "Alexandr", LastName = "Alexandr"};
+                product2.Author = author2;
                 libraryContex.Authors.Add(author2);
                 var author3 = new Author()
                     {Id = product3.Id, FirstName = "Vasily", LastName = "Vasily"};
+                product3.Author = author3;
                 libraryContex.Authors.Add(author3);
 
 
@@ -181,13 +188,10 @@ namespace LibrarySystem
 
                 var product4 = new Product()
                     {Name = "product4", TypeOfCategory = TypeOfCategory.Story, InStock = true, Library = library2};
-                libraryContex.Products.Add(product4);
                 var product5 = new Product()
                     {Name = "product5", TypeOfCategory = TypeOfCategory.Textbook, InStock = false, Library = library2};
-                libraryContex.Products.Add(product5);
                 var product6 = new Product()
                     {Name = "product6", TypeOfCategory = TypeOfCategory.Story, InStock = true, Library = library2};
-                libraryContex.Products.Add(product6);
 
                 var author4 = new Author()
                     {Id = product4.Id, FirstName = "Max", LastName = "Max"};
@@ -198,36 +202,50 @@ namespace LibrarySystem
                 var author6 = new Author()
                     {Id = product6.Id, FirstName = "Vasily", LastName = "Vasily"};
                 libraryContex.Authors.Add(author6);
-
+                product1.Author = author1;
+                product2.Author = author2;
+                product3.Author = author3;
+                product4.Author = author4;
+                product5.Author = author5;
+                product6.Author = author6;
 
                 var edition4 = new Edition()
                     {Id = product4.Id, Name = "D", TypeOfEdition = TypeOfEdition.Book};
+                product4.Edition = edition4;
                 libraryContex.Editions.Add(edition4);
                 var edition5 = new Edition()
                     {Id = product5.Id, Name = "E", TypeOfEdition = TypeOfEdition.Newspaper};
+                product5.Edition = edition5;
                 libraryContex.Editions.Add(edition5);
                 var edition6 = new Edition()
                     {Id = product6.Id, Name = "F", TypeOfEdition = TypeOfEdition.Reports};
+                product6.Edition = edition6;
                 libraryContex.Editions.Add(edition6);
 
                 var location4 = new Location()
                     {Id = product4.Id, NumberOfBench = 1, NumberOfHall = 1, NumberOfShelving = 1};
+                product4.Location = location4;
                 libraryContex.Locations.Add(location4);
                 var location5 = new Location()
                     {Id = product5.Id, NumberOfBench = 2, NumberOfHall = 2, NumberOfShelving = 2};
+                product5.Location = location5;
                 libraryContex.Locations.Add(location5);
                 var location6 = new Location()
                     {Id = product6.Id, NumberOfBench = 3, NumberOfHall = 3, NumberOfShelving = 3};
+                product6.Location = location6;
                 libraryContex.Locations.Add(location6);
 
                 var limit4 = new Limit()
                     {Id = product4.Id, LimitValue = "limitValue4"};
+                product4.Limit = limit4;
                 libraryContex.Limits.Add(limit4);
                 var limit5 = new Limit()
                     {Id = product5.Id, LimitValue = "limitValue5"};
+                product5.Limit = limit5;
                 libraryContex.Limits.Add(limit5);
                 var limit6 = new Limit()
                     {Id = product6.Id, LimitValue = "limitValue6"};
+                product6.Limit = limit6;
                 libraryContex.Limits.Add(limit6);
 
                 var issue1 = new Issue()
@@ -235,19 +253,16 @@ namespace LibrarySystem
                     DateOfIssue = new DateTime(2000, 1, 10), DateOfExpiry = new DateTime(2001, 1, 10),
                     Product = product1, Ticket = student1, IsReturned = false, Library = library1
                 };
-                libraryContex.Issues.Add(issue1);
                 var issue2 = new Issue()
                 {
                     DateOfIssue = new DateTime(2010, 1, 10), DateOfExpiry = new DateTime(2011, 1, 10),
                     Product = product2, Ticket = student2, IsReturned = true, Library = library1
                 };
-                libraryContex.Issues.Add(issue2);
                 var issue3 = new Issue()
                 {
                     DateOfIssue = new DateTime(2018, 1, 10), DateOfExpiry = new DateTime(2019, 1, 10),
                     Product = product3, Ticket = pensioner1, IsReturned = false, Library = library1
                 };
-                libraryContex.Issues.Add(issue3);
 
 
                 var issue4 = new Issue()
@@ -255,37 +270,47 @@ namespace LibrarySystem
                     DateOfIssue = new DateTime(2004, 1, 10), DateOfExpiry = new DateTime(2005, 1, 10),
                     Product = product4, Ticket = pensioner2, IsReturned = false, Library = library2
                 };
-                libraryContex.Issues.Add(issue4);
                 var issue5 = new Issue()
                 {
                     DateOfIssue = new DateTime(2005, 1, 10), DateOfExpiry = new DateTime(2006, 1, 10),
                     Product = product5, Ticket = teacher3, IsReturned = true, Library = library2
                 };
-                libraryContex.Issues.Add(issue5);
                 var issue6 = new Issue()
                 {
                     DateOfIssue = new DateTime(2006, 1, 10), DateOfExpiry = new DateTime(2007, 1, 10),
                     Product = product6, Ticket = schoolchild2, IsReturned = true, Library = library2
                 };
+                libraryContex.Products.AddRange(product1,product2,product3,product4,product5,product6);
                 libraryContex.Issues.Add(issue6);
 
                 var libraryWorker1 = new LibraryWorker()
                     {FirstName = "Konstantin1", LastName = "Konstantin1", Library = library1};
                 libraryContex.LibraryWorkers.Add(libraryWorker1);
+                issue1.LibraryWorker = new List<LibraryWorker>() {libraryWorker1};
                 var libraryWorker2 = new LibraryWorker()
                     {FirstName = "Konstantin2", LastName = "Konstantin2", Library = library1};
                 libraryContex.LibraryWorkers.Add(libraryWorker2);
+
+                issue2.LibraryWorker = new List<LibraryWorker>() {libraryWorker2};
+                library1.LibraryWorker = new List<LibraryWorker>() {libraryWorker1, libraryWorker2};
                 var libraryWorker3 = new LibraryWorker()
                     {FirstName = "libWorker3", LastName = "libWorker3", Library = library2};
                 libraryContex.LibraryWorkers.Add(libraryWorker3);
+
+                issue3.LibraryWorker = new List<LibraryWorker>() {libraryWorker3};
                 var libraryWorker4 = new LibraryWorker()
                     {FirstName = "libWorker4", LastName = "libWorker4", Library = library2};
                 libraryContex.LibraryWorkers.Add(libraryWorker4);
+
+                issue4.LibraryWorker = new List<LibraryWorker>() {libraryWorker4};
+                library2.LibraryWorker = new List<LibraryWorker>() {libraryWorker3, libraryWorker4};
+                libraryContex.Issues.AddRange(issue1,issue2,issue3,issue4,issue5,issue6);
+
                 libraryContex.SaveChanges();
             }
         }
 
-        private void DoFirstRequest(object sender, RoutedEventArgs e)
+        private void PrintSchoolchildByClass(object sender, RoutedEventArgs e)
         {
             var schoolchildByClass = _libraryContextRepository.GetSchoolchildByClass(int.Parse(NumberOfClass.Text));
             grid.ItemsSource = null;
@@ -294,7 +319,7 @@ namespace LibrarySystem
             Result.Content = "Результат 1 запроса";
         }
 
-        private void DoSecondRequest(object sender, RoutedEventArgs e)
+        private void PrintWorkerByWorkPlace(object sender, RoutedEventArgs e)
         {
             var workerByWorkPlace = _libraryContextRepository.GetWorkerByWorkPlace(WorkPlace.Text);
             grid.ItemsSource = null;
@@ -303,7 +328,7 @@ namespace LibrarySystem
             Result.Content = "Результат 2 запроса";
         }
 
-        private void DoThirdRequest(object sender, RoutedEventArgs e)
+        private void PrintTeacherByUniversity(object sender, RoutedEventArgs e)
         {
             var teacherByUniversity = _libraryContextRepository.GetTeacherByUniversity(NameOfUniversity.Text);
             grid.ItemsSource = null;
@@ -312,7 +337,7 @@ namespace LibrarySystem
             Result.Content = "Результат 3 запроса";
         }
 
-        private void DoFourRequest(object sender, RoutedEventArgs e)
+        private void PrintPensionerByNumberOfPensionDocument(object sender, RoutedEventArgs e)
         {
             var pensionerByNumberOfPensionDocument = _libraryContextRepository.GetPensionerByNumberOfPensionDocument(
                 int.Parse(NumberOfPensionDocument.Text));
@@ -322,7 +347,7 @@ namespace LibrarySystem
             Result.Content = "Результат 4 запроса";
         }
 
-        private void DoFiveRequest(object sender, RoutedEventArgs e)
+        private void PrintStudentByUniversity(object sender, RoutedEventArgs e)
         {
             var studentByUniversity = _libraryContextRepository.GetStudentByUniversity(NameOfUniversityByStudent.Text);
             grid.ItemsSource = null;
@@ -331,26 +356,39 @@ namespace LibrarySystem
             Result.Content = "Результат 5 запроса";
         }
 
-        private void DoSixRequest(object sender, RoutedEventArgs e)
+        private void PrintPeopleByReadingProduct(object sender, RoutedEventArgs e)
         {
             var peopleByReadingProduct = _libraryContextRepository.GetPeopleByReadingProduct(NameOfBook.Text);
             grid.ItemsSource = null;
-            grid.ItemsSource = peopleByReadingProduct.Result;
+            if (peopleByReadingProduct != null)
+            {
+                grid.ItemsSource = peopleByReadingProduct.Result;
+            }
+
             Result.Content = null;
             Result.Content = "Результат 6 запроса";
         }
 
-        private void DoSevenRequest(object sender, RoutedEventArgs e)
+        private void PrintPeopleByReadingProductOnTime(object sender, RoutedEventArgs e)
         {
-            var peopleByReadingProductOnTime = _libraryContextRepository.GetPeopleByReadingProductOnTime(new DateTime(),
-                new DateTime());
-            grid.ItemsSource = null;
-            grid.ItemsSource = peopleByReadingProductOnTime.Result;
-            Result.Content = null;
-            Result.Content = "Результат 7 запроса";
+            DateTime startDay;
+            DateTime finishDay;
+            var startDayIsParsed = DateTime.TryParse(datePicker1.SelectedDate.ToString(), out startDay);
+            var finishDayIsParsed = DateTime.TryParse(datePicker2.SelectedDate.ToString(), out finishDay);
+
+            if (startDayIsParsed && finishDayIsParsed)
+            {
+                var peopleByReadingProductOnTime = _libraryContextRepository.GetPeopleByReadingProductOnTime(
+                    startDay,
+                    finishDay);
+                grid.ItemsSource = null;
+                grid.ItemsSource = peopleByReadingProductOnTime.Result;
+                Result.Content = null;
+                Result.Content = "Результат 7 запроса";
+            }
         }
 
-        private void DoEightRequest(object sender, RoutedEventArgs e)
+        private void PrintMostPopularProduct(object sender, RoutedEventArgs e)
         {
             var popularProduct = _libraryContextRepository.GetMostPopularProduct();
             grid.ItemsSource = null;
@@ -359,7 +397,7 @@ namespace LibrarySystem
             Result.Content = "Результат 8 запроса";
         }
 
-        private void DoNineRequest(object sender, RoutedEventArgs e)
+        private void PrintWorkerLibraryByLibrary(object sender, RoutedEventArgs e)
         {
             var workerLibraryByLibrary = _libraryContextRepository.GetWorkerLibraryByLibrary(int.Parse(IdLibrary.Text));
             grid.ItemsSource = null;
@@ -368,13 +406,66 @@ namespace LibrarySystem
             Result.Content = "Результат 9 запроса";
         }
 
-        private void DoTenRequest(object sender, RoutedEventArgs e)
+        private void PrintOverdueReader(object sender, RoutedEventArgs e)
         {
             var overdueReader = _libraryContextRepository.GetOverdueReader();
             grid.ItemsSource = null;
             grid.ItemsSource = overdueReader.Result;
             Result.Content = null;
             Result.Content = "Результат 10 запроса";
+        }
+
+        private void PrintProductByLocation(object sender, RoutedEventArgs routedEventArgs)
+        {
+            var productByLocation = _libraryContextRepository.GetProductByLocation(int.Parse(NumberOfShelving.Text));
+            grid.ItemsSource = null;
+            grid.ItemsSource = productByLocation.Result;
+            Result.Content = null;
+            Result.Content = "Результат 11 запроса";
+        }
+
+        private void PrintPeopleServicedByLibraryWorker(object sender, RoutedEventArgs e)
+        {
+            var servicedByLibraryWorker =
+                _libraryContextRepository.GetPeopleServicedByLibraryWorker(int.Parse(LibraryWorkerId.Text));
+            grid.ItemsSource = null;
+            grid.ItemsSource = servicedByLibraryWorker.Result;
+            Result.Content = null;
+            Result.Content = "Результат 12 запроса";
+        }
+
+        private void PrintProductByAuthor(object sender, RoutedEventArgs e)
+        {
+            var product = _libraryContextRepository.GetProductByAuthor(int.Parse(AuthorId.Text));
+            grid.ItemsSource = null;
+            grid.ItemsSource = product.Result;
+            Result.Content = null;
+            Result.Content = "Результат 13 запроса";
+        }
+
+        private void PrintCountPeopleServicedByLibraryWorker(object sender, RoutedEventArgs e)
+        {
+            DateTime startDay;
+            DateTime finishDay;
+            var startDayIsParsed = DateTime.TryParse(datePicker3.SelectedDate.ToString(), out startDay);
+            var finishDayIsParsed = DateTime.TryParse(datePicker4.SelectedDate.ToString(), out finishDay);
+
+            if (startDayIsParsed && finishDayIsParsed)
+            {
+                var countPeople = _libraryContextRepository.GetPeopleByReadingProductOnTime(
+                    startDay,
+                    finishDay);
+                grid.ItemsSource = null;
+                grid.ItemsSource = countPeople.Result;
+                Result.Content = null;
+                Result.Content = "Результат 14 запроса";
+            }
+        }
+
+        private void ShowTickets(object sender, RoutedEventArgs e)
+        {
+            var newWindow = new AddReader();
+            newWindow.Show();
         }
     }
 }
